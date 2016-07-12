@@ -1,0 +1,424 @@
+*{
+	margin: 0 auto;
+	padding: 0;
+}
+
+body {
+	font-family: "Helvectica", Sans-serif;
+}
+
+#header {
+    background: #0077B5;
+    z-index: 11;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sticky {
+    position: fixed !important;
+    top: 0;
+}
+
+.main-content {
+    position: relative;
+	font-size: 1em;
+	padding: 0;
+    border-collapse: separate;
+}
+
+
+/* ------------------------------------------------ Main table styling ------------------------------------------------ */
+.selectedRow {
+    background-color: #E5EFC7 !important;
+    font-weight: bold;
+}
+
+/*LEFT SIDE NUMBERING*/
+#output tbody, #form tbody {
+    counter-reset: rowNumber;
+}
+
+#output tbody tr, #form tbody tr {
+    counter-increment: rowNumber;
+}
+
+#output tbody tr td:first-child::before, #form tbody tr td:first-child::before {
+    content: counter(rowNumber);
+    margin-right: .7em;
+    font-size: .7em;
+    margin-left: .2em;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #E0E2E4;
+}
+
+table tbody tr:hover{
+    background-color: #CFEDFB;
+}
+
+table,th,td {
+    border: 1px solid #000;
+/*    border: none;*/
+    text-align: center;
+}
+
+#output tbody td:first-child {
+    text-align: left;
+    font-size: .8em;
+}
+
+
+#output th:not(:first-child) {
+    width: 12%;
+}
+
+#output th:last-child {
+    width: 15%;
+}
+
+#output td:last-child, #tableLog td:last-child {
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: .8em;
+}
+
+#output thead #sl {
+    cursor: pointer;
+}
+
+table tbody tr #clickEdit {
+    cursor: pointer;
+}
+
+th.tooltip {outline:none; }
+th.tooltip strong {line-height:10px;}
+th.tooltip:hover {text-decoration:none;} 
+th.tooltip span {
+    z-index:10;display:none; 
+    padding:3px 2px;
+    margin-top:-30px; margin-left:-150px;
+    width:200px; 
+    line-height:16px;
+    font-size: 12px;
+}
+
+th.tooltip:hover span{
+    display:inline; 
+    position:absolute; 
+    color:#111;
+    border:1px solid #DCA; 
+    background:#fffAF0;}
+
+#output thead th, #logs thead th {
+	border-bottom: 2px solid black;
+    background-color: #0077B5;
+    color: #fff;
+    padding: 4px 1px;
+}
+
+#form thead, th {
+    border-bottom: 2px solid black;
+    /*background-color: #0077B5;*/
+    color: #fff;
+    padding: 4px 1px;
+}
+
+td {
+    padding: 3px 0px; 
+}
+
+#remove {
+    width: 15px;
+    height: 20px;
+    padding: 2px 10px;
+    position: relative;
+    float: right;
+    top: 1px;
+    background-image: url(/images/delete_icon.png);
+    background-size: 100%;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    visibility: hidden;
+}
+
+td:hover #remove, td:hover .edit {
+    visibility: visible;
+}
+
+.edit {
+    width: 15px;
+    height: 20px;
+    padding: 2px 10px;
+    position: relative;
+    float: right;
+    top: 1px;
+    background-image: url(/images/icon-pencil-square.png);
+    background-size: 100%;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    visibility: hidden;
+}
+
+table button.cancel, table button.saveEdit {
+    margin-left: 3px;
+    margin-top: 2px;
+    padding: 1px;
+    background-color: #CCCFD3;
+    cursor: pointer;
+}
+
+#output button.saveEdit:hover {
+    background-color: #92C749;
+    color: #fff;
+}
+
+#output button.cancel:hover {
+    background-color: #C9342F;
+    color: #fff;
+}
+
+/*table button.sub {
+    position: relative;
+    left: 25px;
+    padding: 5px 5px;
+    margin: auto;
+    float: left;
+    background-color: transparent;
+    border: none;
+    font-size: .5em;
+}
+
+table button.add {
+    position: relative;
+    right: 25px;
+    padding: 5px 5px;
+    margin: auto;
+    float: right;
+    background-color: transparent;
+    border: none;
+    font-size: .5em;
+}*/
+
+table button.sub:hover, table button.add:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#output input[type="number"] {
+    width: 50px;
+    padding: 3px 0px;
+    font-size: .7em;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 10px;
+    background-color: transparent;
+}
+
+#output input[type="text"] {
+    width: 120px;
+    position: relative;
+    padding: 3px;
+    font-size: .7em;
+    background-color: transparent;
+}
+
+#output ul li {
+    list-style-type: none;
+}
+
+div .tableFooter {
+    position: relative;
+    float: right;
+    margin-top: 50px;
+    margin-bottom: 50px; 
+    font-size: .7em;
+}
+
+div .tableFooter ul li {
+    list-style-type: square;
+    position: relative;
+}
+
+input[type=radio] {
+        display: none;
+    }
+
+.categoryTab label {
+    margin: 0 5px;
+    font-size: .8em;
+}
+
+.categoryTab input {
+    margin-bottom: 5px;
+}
+
+input[type=radio]+label:hover {
+        /*background-color: #E0E2E4;*/
+        border-bottom: 2px solid #00A0DC;
+        cursor: pointer;
+    }
+
+input[type=radio]:checked+label {
+        /*background-color: #CFEDFB;*/
+        border-bottom: 2px solid red;
+    } 
+
+/*  ----------------------------- add new item table style    -------------------------      */
+.category {
+    text-align: center;
+    position: relative;
+    right: 150px;
+}
+
+#search {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 0 5px;
+    color: red;
+}
+
+
+select:invalid {
+    color: gray;
+}  
+
+#form th:last-child {
+    width: 20%;
+}
+
+#form input[class="name"] {
+    width: 300px;
+    padding: 3px;
+    background-color: transparent;
+    border: none;
+    border-bottom: .5px solid;
+}
+
+#form input[class="name"]:hover {
+    border-bottom: 1px solid #7CBB2F;
+}
+
+#form input[class="sku"] {
+    width: 250px;
+    padding: 3px;
+    font-size: .7em;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+}
+
+input:focus {
+    outline: none;
+    cursor: none;
+}
+
+#form input[type="number"] {
+    width: 60px;
+    padding: 3px;
+    font-size: .7em;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+}
+
+#form input[class="price"]{
+    width: 100px;
+}
+
+#form td:first-child {
+    text-align: left;
+}
+
+#form input[type="button"] {
+    background-color: transparent;
+    border: none;
+}
+
+#form input[type="button"]:hover {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#form .addAnother {
+    width: 15px;
+    height: 20px;
+    padding: 2px 10px;
+    position: relative;
+    top: 1px;
+    background-image: url(/images/add_doc.png);
+    background-size: 100%;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.submitClear input[type="button"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    margin-top: 8px;
+}
+
+.submitClear input[type="button"]:hover {
+    background-color: #CFEDFB;
+    border: none;
+    cursor: pointer;
+}
+
+.submitClear{
+    position: relative;
+    clear: both;
+    left: 78%;
+}
+
+/* -----------------------------Log table style------------------------------------------------*/
+#tableLog td{
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 10px;
+    font-size: .8em;
+}
+
+
+/* -----------------------------edit mode------------------------------------------------*/
+table tbody tr td .noEdit, table tbody tr td label {
+    display: none;
+}
+
+table tbody tr td.onEdit .amount, table tbody tr td.onEdit .cancel, table tbody tr td.onEdit .commentEdit, table tbody tr td.onEdit .saveEdit, table tbody tr td.onEdit td {
+    display: initial;
+    border: 1px solid black;
+}
+
+table tbody tr td.onEdit .edit, table tbody tr td.onEdit span[name="currentAmount"]{
+    display: none;
+}
+
+
+

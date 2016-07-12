@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>CC - GLOBAL INVENTORY</title>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/dataTable.css" rel="stylesheet" type="text/css">
+    <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+</head>
+<body>
+    <!-- ******************************** nav menu anchor to top *********************************** -->
+    <div id="sticky-anchor"></div><!-- ******************************** Nav Menu *********************************** -->
+    <div class="main-menu" id="header">
+        <div class="container">
+            <ul>
+                <li><a href="#globalInv">GLOBAL INVENTORY</a></li>
+                <li><a href="#addItem">Add New Item</a></li>
+                <li><a href="#logs">Edit Log</a></li>
+<!--            <li><a href="#carp">CARPINTERIA</a></li>
+                <li ><a href="#newItem">ADD NEW ITEM</a></li> -->
+            </ul>
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ HOMEPAGE TAB ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div id="globalInv">
+                <br>
+                    <div class="main-content">
+                 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ CATEGORY TAB ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->                       
+                        <div class="categoryTab">
+                            <span><b>Search: </b></span><input id="search" placeholder="Item Name" type="text">
+                            <span style="padding: 5px 5px 5px 30px;"><b>Filter by Category: </b></span>
+                            <INPUT type="radio" id="allItem"><label for="allItem"><a href="http://nphan-ld1:3000/" style="text-decoration: none;">All Items</a></label>
+                            <INPUT autocomplete="off" name="catTab" type="radio" id="desktopTab" value="Desktop"><label for="desktopTab">Desktops &amp; Monitors</label>
+                            <INPUT autocomplete="off" name="catTab" type="radio" id="laptopTab" value="Laptop"><label for="laptopTab">Laptops</label>
+                            <INPUT autocomplete="off" name="catTab" type="radio" id="appleTab" value="Apple"><label for="appleTab">Apple Perifs</label>
+                            <INPUT autocomplete="off" name="catTab" type="radio" id="windowsTab" value="Windows"><label for="windowsTab">Windows Perifs</label>
+                            <INPUT autocomplete="off" name="catTab" type="radio" id="otherTab" value="Other"><label for="otherTab">Other Perifs</label>
+                            <hr>
+                        </div>
+                        <br>
+                        <div class="tableContent">
+                            <table cellspacing="1" id="output" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="tooltip" id="sl">Item Name <span>Click to sort by Name</span></th>
+                                        <th>Sunnyvale</th>
+                                        <th>Mt. View</th>
+                                        <th>S.Francisco</th>
+                                        <th>New York</th>
+                                        <th>Carpinteria</th>
+                                        <th>Last edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class='tableFooter'>
+                            <ul>
+                                <li>Count &#8924; 50 will be highlighted <font style="color: red; font-weight: bold;">RED</font></li>
+                                <li>Report issues / ideas, <font style="font-size: 1em;">nphan@linkedin.com</font></li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ ADD ITEM TAB ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div id="addItem">
+                <div class="category">
+                        <span>Select Category: </span>
+                            <select id="selectCat" required width="50px" autocomplete="off">
+                                <option value="" disabled selected hidden>Please select...</option>    
+                                <option id="Desktops" value="Desktops">Desktops</option>
+                                <option id="Laptops" value="Laptops">Laptops</option>
+                                <option id="Apple_Peripherals" value="Apple_Peripherals">Apple Peripherals</option>
+                                <option id="Windows_Peripherals" value="Windows_Peripherals">Windows Peripherals</option>
+                                <option id="Other" value="Other">Other</option>
+                            </select>   
+                    </div><br>
+                <table cellspacing="1" id="form" width="90%" hidden>
+                    <thead>
+                        <tr>
+                            <th>Add New Item</th>
+                            <th>SV Amount</th>
+                            <th>MTV Amount</th>
+                            <th>San Francisco</th>
+                            <th>NY Amount</th>
+                            <th>Carp Amount</th>
+                            <th>Price ($)</th>
+                            <th>Sku #</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input autocomplete="off" class="name" name="name" placeholder="Item Name" required="required" type="text"> <input class="addAnother" type="button"></td>
+                            <td><input autocomplete="off" class="svAmount" name="amount" placeholder="SV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="mtvAmount" name="amount" placeholder="MTV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sfAmount" name="amount" placeholder="SF AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="nyAmount" name="amount" placeholder="NYC AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="carpAmount" name="amount" placeholder="CARP AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="price" name="amount" placeholder="Price" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sku" name="amount" placeholder="Sku #" type="text" value="0"></td>
+                        </tr>
+                        <tr hidden="">
+                            <td><input autocomplete="off" class="name" name="name" placeholder="Item Name" type="text"> <input class="addAnother" type="button"></td>
+                            <td><input autocomplete="off" class="svAmount" name="amount" placeholder="SV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="mtvAmount" name="amount" placeholder="MTV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sfAmount" name="amount" placeholder="SF AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="nyAmount" name="amount" placeholder="NYC AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="carpAmount" name="amount" placeholder="CARP AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="price" name="amount" placeholder="Price" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sku" name="amount" placeholder="Sku #" type="text" value="0"></td>
+                        </tr>
+                        <tr hidden="">
+                            <td><input autocomplete="off" class="name" name="name" placeholder="Item Name" type="text"> <input class="addAnother" type="button"></td>
+                            <td><input autocomplete="off" class="svAmount" name="amount" placeholder="SV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="mtvAmount" name="amount" placeholder="MTV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sfAmount" name="amount" placeholder="SF AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="nyAmount" name="amount" placeholder="NYC AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="carpAmount" name="amount" placeholder="CARP AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="price" name="amount" placeholder="Price" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sku" name="amount" placeholder="Sku #" type="text" value="0"></td>
+                        </tr>
+                        <tr hidden="">
+                            <td><input autocomplete="off" class="name" name="name" placeholder="Item Name" type="text"> <input class="addAnother" type="button"></td>
+                            <td><input autocomplete="off" class="svAmount" name="amount" placeholder="SV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="mtvAmount" name="amount" placeholder="MTV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sfAmount" name="amount" placeholder="SF AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="nyAmount" name="amount" placeholder="NYC AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="carpAmount" name="amount" placeholder="CARP AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="price" name="amount" placeholder="Price" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sku" name="amount" placeholder="Sku #" type="text" value="0"></td>
+                        </tr>
+                        <tr hidden="">
+                            <td><input autocomplete="off" class="name" name="name" placeholder="Item Name" type="text"> <input class="addAnother" type="button"></td>
+                            <td><input autocomplete="off" class="svAmount" name="amount" placeholder="SV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="mtvAmount" name="amount" placeholder="MTV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sfAmount" name="amount" placeholder="SF AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="nyAmount" name="amount" placeholder="NYC AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="carpAmount" name="amount" placeholder="CARP AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="price" name="amount" placeholder="Price" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sku" name="amount" placeholder="Sku #" type="text" value="0"></td>
+                        </tr>
+                        <tr hidden="">
+                            <td><input autocomplete="off" class="name" name="name" placeholder="Item Name" type="text"></td>
+                            <td><input autocomplete="off" class="svAmount" name="amount" placeholder="SV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="mtvAmount" name="amount" placeholder="MTV AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sfAmount" name="amount" placeholder="SF AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="nyAmount" name="amount" placeholder="NYC AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="carpAmount" name="amount" placeholder="CARP AMOUNT" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="price" name="amount" placeholder="Price" type="number" value="0"></td>
+                            <td><input autocomplete="off" class="sku" name="amount" placeholder="Sku #" type="text" value="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="submitClear" hidden>
+                    <input class="submit" type="button" value="Submit"> <input class="clear" type="button" value="Clear">
+                </div>
+            </div><!-- ~~~~~~~~~~~~~~~~~~~~~~~~ LOGS TAB ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div id="logs">
+                <table cellspacing="1" id="tableLog" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Item Name</th>
+                            <th>Sunnyvale</th>
+                            <th>Mt. View</th>
+                            <th>San Francisco</th>
+                            <th>New York</th>
+                            <th>Carpinteria</th>
+                            <th>Last Edit Made</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class='tableFooter'>
+                        <ul>
+                            <li>Changes made are in <font style="color: red; font-weight: bold;">RED</font></li>
+                            <li>Report issues / ideas, <font style="font-size: 1em;">nphan@linkedin.com</font></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//nphan-ld1/js/jquery-1.11.2.min.js"></script> 
+<!--     // <script src="//nphan-ld1/js/dataTables.min.js"></script>  -->
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <script src="/js/index.js"></script>
+</body>
+</html>
