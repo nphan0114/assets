@@ -1,0 +1,41 @@
+@import 'https://fonts.googleapis.com/css?family=Abel';
+
+*, *:before, *:after, body {
+	margin: 0;
+	padding: auto;
+	font-family: "Abel", Sans-Serif;
+}
+
+#itemOut tbody tr td:first-child {
+	text-align: left;
+}
+
+#itemOut button {
+	float: right;
+}
+
+#itemOut thead, th, td{
+	border: none;
+	text-align: center;
+	border-bottom: 1px solid #eee;
+	padding: 5px;
+}
+
+#itemOut tbody tr:hover {
+	cursor: pointer;
+	background: #eee;
+}
+
+.search {
+	width: 100%;
+	font-family: "Abel", Sans-Serif;
+	font-size: 1.5em;
+	outline: none;
+	padding: 0 55px ;
+	color: #666666;
+	font-variant: small-caps;
+}
+
+.search:focus {
+	font-weight: bold;
+}
