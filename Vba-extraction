@@ -1,0 +1,203 @@
+Option Explicit
+
+'Extract date from Outlook message to Excel [FTE & Temps]
+
+Sub CopyToExcel()
+Dim XLApp As Object
+Dim xlWB As Object
+Dim xlSheet As Object
+Dim olItem As Outlook.MailItem
+Dim vText As Variant
+Dim sText As String
+Dim vItem As Variant
+Dim remote As String
+Dim hireType As String
+Dim osType As String
+Dim i As Long
+Dim rCount As Long
+Dim bXStarted As Boolean
+Const strPath As String = "C:\Temp\file" 'the path of the workbook
+Const startDate As String = "7.17.17" 'set start date
+
+If Application.ActiveExplorer.Selection.Count = 0 Then
+    MsgBox "No Items selected!", vbCritical, "Error"
+    Exit Sub
+End If
+On Error Resume Next
+Set XLApp = GetObject(, "Excel.Application")
+If Err <> 0 Then
+    Application.StatusBar = "Please wait while Excel source is opened ... "
+    Set XLApp = CreateObject("Excel.Application")
+    bXStarted = True
+End If
+On Error GoTo 0
+'Open the workbook to input the data
+Set xlWB = XLApp.Workbooks.Open(strPath)
+Set xlSheet = xlWB.Sheets(startDate) 'name of excel sheet
+
+'Process each selected message
+For Each olItem In Application.ActiveExplorer.Selection
+    sText = olItem.Body
+    'Debug.Print olItem.ReceivedTime
+    vText = Split(sText, Chr(13))
+    'Find the next empty line of the worksheet
+    rCount = xlSheet.Range("B" & xlSheet.Rows.Count).End(xlUp).Row
+    rCount = rCount + 1
+
+    'Check each line of text in the message body
+    For i = UBound(vText) To 0 Step -1
+    
+    '------------------FTE-----------------------------
+        If InStr(1, vText(i), "Hire Type:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            hireType = Trim(vItem(1))
+            If hireType = "Rehire" Or hireType = "Intern Conversion" Then
+                xlSheet.Range("A" & rCount) = "Rehire"
+                xlSheet.Range("G" & rCount) = "Rehire"
+            End If
+        End If
+        
+        If InStr(1, vText(i), "ticket at:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("B" & rCount) = Left(Trim(vItem(1)), 11)
+        End If
+        
+        If InStr(1, vText(i), "Dept:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("N" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Employment Type:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("C" & rCount) = Trim(vItem(1)) + " " + startDate
+        End If
+
+        If InStr(1, vText(i), "Title:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("O" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "First Name:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("D" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Last Name:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("E" & rCount) = Trim(vItem(1))
+        End If
+        
+         If InStr(1, vText(i), "Manager Name:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("F" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Office Location:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("M" & rCount) = Trim(vItem(1))
+        End If
+        
+        If InStr(1, vText(i), "Office Location:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            remote = Trim(vItem(1))
+            If remote = "Sunnyvale" Or remote = "Home Office" Or remote = "US-Mountain View" Or remote = "Mountain View" Or remote = "Carpinteria" Or remote = "San Francisco" Or remote = "Sao Paulo" Or remote = "US-San Francisco" Or remote = "US-Sunnyvale" Then
+                xlSheet.Range("G" & rCount) = ""
+                Else
+                xlSheet.Range("G" & rCount) = "Remote"
+            End If
+        End If
+        
+        If InStr(1, vText(i), "Start Date:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("P" & rCount) = Trim(vItem(1))
+        End If
+        
+        '---------------------TEMPS----------------------
+          If InStr(1, vText(i), "Contact for Space Planning:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("B" & rCount) = Trim(vItem(1))
+        End If
+        
+           If InStr(1, vText(i), "CW Type:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("B" & rCount) = Trim(vItem(1))
+        End If
+        
+        If InStr(1, vText(i), "Department:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("N" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Employee Type:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("C" & rCount) = "CW " + startDate
+        End If
+        
+        If InStr(1, vText(i), "Job Title:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("O" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Employee First Name:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("D" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Employee Last Name:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("E" & rCount) = Trim(vItem(1))
+        End If
+
+        If InStr(1, vText(i), "Manager Name:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("F" & rCount) = Trim(vItem(1))
+        End If
+        
+        If InStr(1, vText(i), "Computer Operating System:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            osType = Trim(vItem(1))
+            If osType = "No Computer" Then
+                xlSheet.Range("K" & rCount) = "Email Only"
+                xlSheet.Range("A" & rCount) = "Need to send"
+                Else
+                xlSheet.Range("K" & rCount) = "Used " + osType
+            End If
+        End If
+
+        If InStr(1, vText(i), "Desk Location:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("M" & rCount) = Trim(vItem(1))
+        End If
+        
+        If InStr(1, vText(i), "Desk Location:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            remote = Trim(vItem(1))
+            If remote = "Sunnyvale" Or remote = "Home Office" Or remote = "US-Mountain View" Or remote = "Mountain View" Or remote = "Carpinteria" Or remote = "San Francisco" Or remote = "Sao Paulo" Or remote = "US-San Francisco" Or remote = "US-Sunnyvale" Then
+                xlSheet.Range("G" & rCount) = ""
+                Else
+                xlSheet.Range("G" & rCount) = "Remote"
+            End If
+        End If
+        
+        If InStr(1, vText(i), "Project Start Date:") > 0 Then
+            vItem = Split(vText(i), Chr(58))
+            xlSheet.Range("P" & rCount) = Trim(vItem(1))
+        End If
+'------------------End extraction field------------------'
+
+'get date when email was received
+xlSheet.Range("Q" & rCount) = olItem.ReceivedTime
+
+    Next i
+    xlWB.Save
+Next olItem
+xlWB.Close SaveChanges:=True
+If bXStarted Then
+    XLApp.Quit
+End If
+Set XLApp = Nothing
+Set xlWB = Nothing
+Set xlSheet = Nothing
+Set olItem = Nothing
+MsgBox "Nghia's dabest :D"
+End Sub
